@@ -44,7 +44,7 @@ export default function ListTags() {
         <li>Red Mars</li>
         <li>The Forever War</li>
       </ul>
-      Yi Jhao Chen&apos;s favorite books (in no particular order)
+      Yi-Jhao Chen&apos;s favorite books (in no particular order)
       <ul id="wd-your-books">
         <li>Percy Jackson</li>
         <li>Harry Potter</li>

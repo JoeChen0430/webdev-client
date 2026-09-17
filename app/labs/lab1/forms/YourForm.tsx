@@ -14,7 +14,7 @@ export default function YourForm() {
       <label htmlFor="wd-your-first-name">First name: </label>
       <input
         type="text"
-        defaultValue="Yi Jhao"
+        defaultValue="Yi-Jhao"
         placeholder="First name"
         id="wd-your-first-name"
       />

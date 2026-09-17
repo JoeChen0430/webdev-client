@@ -26,8 +26,8 @@ export default function HeadingTags()  {
         Style these elements with CSS in the next lab.
         </div>
         <div id="wd-your-heading">
-        <h4>Yi Jhao Chen</h4>
-        I am Yi Jhao Chen, I come from{" "}
+        <h4>Yi-Jhao Chen</h4>
+        I am Yi-Jhao Chen, I come from{" "}
         <span id="wd-your-span">Taiwan</span>
         </div>
     </>

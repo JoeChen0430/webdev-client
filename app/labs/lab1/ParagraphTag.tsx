@@ -30,7 +30,7 @@ export default function ParagraphTag() {
         produce the visible gap between one paragraph and the next.
       </p>
       <p id="wd-p-your-1">
-        Hi, my name is Yi Jhao Chen. I come from Taiwan.
+        Hi, my name is Yi-Jhao Chen. I come from Taiwan.
       </p>
       <p id="wd-p-your-2">
         I hope to learn more about web development in this course.

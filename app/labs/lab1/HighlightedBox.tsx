@@ -68,7 +68,7 @@ export default function HighlightedBoxLab() {
         borderWidth={4}
         borderRadius={4}
       >
-        <h4>Yi Jhao Chen</h4>
+        <h4>Yi-Jhao Chen</h4>
         <ul>
           <li>Get comfortable writing React without copying from examples.</li>
           <li>Build and deploy one full stack project end to end.</li>
