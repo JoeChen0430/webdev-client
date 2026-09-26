@@ -1,5 +1,6 @@
 import Link from "next/link";
 import "@/app/labs/lab2/tailwind/utilities.css";
+import * as db from "../../../../database";
 
 const LABEL = "mb-1 block text-sm font-medium";
 const FIELD =
@@ -9,17 +10,27 @@ const ROW = "mb-4";
 export default async function AssignmentEditor({
   params,
 }: {
-  params: Promise<{ cid: string }>;
+  params: Promise<{ cid: string; aid: string }>;
 }) {
-  const { cid } = await params;
+  const { cid, aid } = await params;
+  const assignment = db.assignments.find((a) => a._id === aid);
   return (
     <div id="wd-assignments-editor" className="max-w-3xl">
       <div className={ROW}>
         <label htmlFor="wd-name" className={LABEL}>
           Assignment Name
         </label>
-        <input id="wd-name" defaultValue="A1 - ENV + HTML" className={FIELD} />
+        <input
+          id="wd-name"
+          defaultValue={assignment?.title ?? ""}
+          className={FIELD}
+        />
       </div>
+
+      {/* With AI: show which assignment the URL selected */}
+      <p id="wd-ai-assignment-id" className="mb-4 text-sm text-neutral-600">
+        Assignment id: {aid}
+      </p>
 
       <div className={ROW}>
         <label htmlFor="wd-description" className={LABEL}>
@@ -29,7 +40,7 @@ export default async function AssignmentEditor({
           id="wd-description"
           rows={8}
           className={FIELD}
-          defaultValue="The assignment is available online. Submit a link to the landing page of your Web application running on Vercel. The landing page should include the following: your full name and section, links to each of the lab assignments, link to the Kambaz application, links to all relevant source code repositories. The Kambaz application should include a link to navigate back to the landing page."
+          defaultValue={assignment?.description ?? ""}
         />
       </div>
 
@@ -38,7 +49,11 @@ export default async function AssignmentEditor({
           <label htmlFor="wd-points" className={LABEL}>
             Points
           </label>
-          <input id="wd-points" defaultValue={100} className={FIELD} />
+          <input
+            id="wd-points"
+            defaultValue={assignment?.points ?? 100}
+            className={FIELD}
+          />
         </div>
         <div>
           <label htmlFor="wd-group" className={LABEL}>
@@ -126,7 +141,7 @@ export default async function AssignmentEditor({
           <input
             type="date"
             id="wd-due-date"
-            defaultValue="2024-05-13"
+            defaultValue={assignment?.due}
             className={FIELD}
           />
         </div>
@@ -138,7 +153,7 @@ export default async function AssignmentEditor({
             <input
               type="date"
               id="wd-available-from"
-              defaultValue="2024-05-06"
+              defaultValue={assignment?.available}
               className={FIELD}
             />
           </div>
@@ -149,14 +164,14 @@ export default async function AssignmentEditor({
             <input
               type="date"
               id="wd-available-until"
-              defaultValue="2024-05-20"
+              defaultValue={assignment?.due}
               className={FIELD}
             />
           </div>
         </div>
       </fieldset>
 
-      {/* With AI: sample notes field */}
+      {/* With AI (ch2): sample notes field */}
       <div className="mt-4">
         <label htmlFor="wd-ai-editor-notes" className={LABEL}>
           Sample notes

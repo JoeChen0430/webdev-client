@@ -1,33 +1,78 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+const LINKS = [
+  {
+    href: "/labs",
+    id: "wd-home-link",
+    label: "Home",
+    match: (p: string) => p === "/labs",
+  },
+  {
+    href: "/labs/lab1",
+    id: "wd-lab1-link",
+    label: "Lab 1",
+    match: (p: string) => p.endsWith("/lab1") || p.includes("/lab1/"),
+  },
+  {
+    href: "/labs/lab2",
+    id: "wd-lab2-link",
+    label: "Lab 2",
+    match: (p: string) => p.includes("/lab2"),
+  },
+  {
+    href: "/labs/lab3",
+    id: "wd-lab3-link",
+    label: "Lab 3",
+    match: (p: string) => p.includes("/lab3"),
+  },
+  {
+    href: "/",
+    id: "wd-kambaz-link",
+    label: "Kambaz",
+    match: () => false,
+  },
+] as const;
+
+const ACTIVE = "rounded bg-blue-600 px-2 py-0.5 text-white no-underline";
 
 export default function TOC() {
+  const pathname = usePathname() ?? "";
   return (
     <div id="wd-toc">
       <b>Yi-Jhao Chen</b>
       <hr />
-      <Link href="/labs" id="wd-lab1-link">
-        Home
-      </Link>
-      <br />
-      <Link href="/labs/lab1">Lab 1</Link>
-      <br />
-      <Link href="/labs/lab2">Lab 2</Link>
-      <br />
-      <Link href="/labs/lab2/tailwind">Tailwind</Link>
-      <br />
-      <Link href="/labs/lab3">Lab 3</Link>
-      <br />
-      <Link href="/labs/lab4">Lab 4</Link>
-      <br />
-      <Link href="/labs/lab5">Lab 5</Link>
-      <br />
-      <Link href="/" id="wd-kambaz-link">
-        Kambaz
-      </Link>
-      <br />
-      <Link href="/book/ch1" id="wd-toc-book-link">
-        Chapter 1
-      </Link>
+      <ul>
+        {LINKS.map((link) => (
+          <li key={link.id}>
+            <Link
+              href={link.href}
+              id={link.id}
+              className={link.match(pathname) ? ACTIVE : undefined}
+            >
+              {link.label}
+            </Link>
+          </li>
+        ))}
+        {/* Lab 4 and Lab 5 are plain placeholders; the Labs index already owns
+            the wd-lab4-link id, so these stay unidentified to keep ids unique. */}
+        <li>
+          <Link href="/labs/lab4">Lab 4</Link>
+        </li>
+        <li>
+          <Link href="/labs/lab5">Lab 5</Link>
+        </li>
+        <li>
+          <Link href="/labs/lab2/tailwind">Tailwind</Link>
+        </li>
+        <li>
+          <Link href="/book/ch1" id="wd-toc-book-link">
+            Chapter 1
+          </Link>
+        </li>
+      </ul>
     </div>
   );
 }

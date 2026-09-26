@@ -1,24 +1,26 @@
 "use client";
 
+import { AiOutlineDashboard } from "react-icons/ai";
+import { IoCalendarOutline } from "react-icons/io5";
+import { LiaBookSolid, LiaCogSolid } from "react-icons/lia";
+import { FaInbox, FaRegCircleUser } from "react-icons/fa6";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { AiOutlineDashboard } from "react-icons/ai";
-import { FaRegCircleUser, FaCircleQuestion } from "react-icons/fa6";
-import { LiaBookSolid } from "react-icons/lia";
-import { IoCalendarOutline } from "react-icons/io5";
-import { FaInbox } from "react-icons/fa";
-import { LiaCogSolid } from "react-icons/lia";
 import "@/app/labs/lab2/tailwind/utilities.css";
 
-const TILE_IDLE =
-  "block bg-black py-3 text-center text-sm text-white no-underline";
-const TILE_ACTIVE =
-  "block bg-white py-3 text-center text-sm text-red-600 no-underline";
+const LINKS = [
+  { label: "Dashboard", path: "/dashboard", icon: AiOutlineDashboard },
+  { label: "Courses", path: "/dashboard", icon: LiaBookSolid },
+  { label: "Calendar", path: "/calendar", icon: IoCalendarOutline },
+  { label: "Inbox", path: "/inbox", icon: FaInbox },
+  { label: "Labs", path: "/labs", icon: LiaCogSolid },
+  // With AI: sample sidebar item, driven from LINKS like the rest
+  { label: "History", path: "/history", icon: IoCalendarOutline },
+] as const;
 
 export default function KambazNavigation() {
   const pathname = usePathname() ?? "";
-  const isActive = (path: string) =>
-    pathname === path || pathname.startsWith(path + "/");
+  const accountActive = pathname.includes("/account");
 
   return (
     <nav
@@ -30,76 +32,46 @@ export default function KambazNavigation() {
         id="wd-neu-link"
         target="_blank"
         rel="noreferrer"
-        className="block bg-black py-4 text-center text-sm text-red-600 no-underline"
+        className="block bg-black py-3 text-center text-sm text-red-600 no-underline"
       >
         Northeastern
       </a>
       <Link
         href="/account"
         id="wd-account-link"
-        className={isActive("/account") ? TILE_ACTIVE : TILE_IDLE}
+        className={`block py-3 text-center text-sm no-underline ${
+          accountActive ? "bg-white text-red-600" : "bg-black text-white"
+        }`}
       >
         <FaRegCircleUser
-          className={
-            isActive("/account")
-              ? "inline-block text-3xl text-red-600"
-              : "inline-block text-3xl text-white"
-          }
+          className={`inline-block text-3xl ${
+            accountActive ? "text-red-600" : "text-white"
+          }`}
         />
         <br />
         Account
       </Link>
-      <Link
-        href="/dashboard"
-        id="wd-dashboard-link"
-        className={isActive("/dashboard") ? TILE_ACTIVE : TILE_IDLE}
-      >
-        <AiOutlineDashboard className="inline-block text-3xl text-red-600" />
-        <br />
-        Dashboard
-      </Link>
-      <Link
-        href="/dashboard"
-        id="wd-course-link"
-        className={isActive("/courses") ? TILE_ACTIVE : TILE_IDLE}
-      >
-        <LiaBookSolid className="inline-block text-3xl text-red-600" />
-        <br />
-        Courses
-      </Link>
-      <Link
-        href="/calendar"
-        id="wd-calendar-link"
-        className={isActive("/calendar") ? TILE_ACTIVE : TILE_IDLE}
-      >
-        <IoCalendarOutline className="inline-block text-3xl text-red-600" />
-        <br />
-        Calendar
-      </Link>
-      <Link
-        href="/inbox"
-        id="wd-inbox-link"
-        className={isActive("/inbox") ? TILE_ACTIVE : TILE_IDLE}
-      >
-        <FaInbox className="inline-block text-3xl text-red-600" />
-        <br />
-        Inbox
-      </Link>
-      <Link
-        href="/labs"
-        id="wd-labs-link"
-        className={isActive("/labs") ? TILE_ACTIVE : TILE_IDLE}
-      >
-        <LiaCogSolid className="inline-block text-3xl text-red-600" />
-        <br />
-        Labs
-      </Link>
-      {/* With AI: sample help tile */}
-      <Link href="/labs" id="wd-ai-nav-help" className={TILE_IDLE}>
-        <FaCircleQuestion className="inline-block text-3xl text-red-600" />
-        <br />
-        Help
-      </Link>
+      {LINKS.map((link) => {
+        const active =
+          link.label === "Dashboard" || link.label === "Courses"
+            ? pathname.includes("/dashboard") || pathname.includes("/courses")
+            : pathname.includes(link.path);
+        const Icon = link.icon;
+        return (
+          <Link
+            key={link.label}
+            href={link.path}
+            id={`wd-${link.label.toLowerCase()}-link`}
+            className={`block py-3 text-center text-sm no-underline ${
+              active ? "bg-white text-red-600" : "bg-black text-white"
+            }`}
+          >
+            <Icon className="inline-block text-3xl text-red-500" />
+            <br />
+            {link.label}
+          </Link>
+        );
+      })}
     </nav>
   );
 }
