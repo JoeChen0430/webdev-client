@@ -11,20 +11,15 @@ export default async function CoursesLayout({
   const { cid } = await params;
   return (
     <div id="wd-courses">
-      <h2>Courses {cid}</h2>
-      <hr />
-      <table>
-        <tbody>
-          <tr>
-            <td valign="top" width="200">
-              <CourseNavigation cid={cid} />
-            </td>
-            <td valign="top" width="100%">
-              {children}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <h2 className="text-2xl font-semibold">Courses {cid}</h2>
+      <hr className="mb-3" />
+      <div className="flex gap-4">
+        {/* Hides together with the Kambaz sidebar at the md breakpoint */}
+        <div className="hidden w-[140px] shrink-0 md:block">
+          <CourseNavigation cid={cid} />
+        </div>
+        <div className="min-w-0 flex-1">{children}</div>
+      </div>
     </div>
   );
 }
