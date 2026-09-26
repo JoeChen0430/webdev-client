@@ -1,17 +1,21 @@
+"use client";
+
+import { useParams } from "next/navigation";
 import { FaUserCircle } from "react-icons/fa";
 import "@/app/labs/lab2/tailwind/utilities.css";
-import * as db from "../../../../database";
+import { users } from "../../../../database";
+import { useEnrollmentsStore } from "../../../../store/enrollmentsStore";
 
-export default async function PeopleTable({
-  params,
-}: {
-  params: Promise<{ cid: string }>;
-}) {
-  const { cid } = await params;
-  const { users, enrollments } = db;
+export default function PeopleTable() {
+  const { cid } = useParams();
+  const courseId = typeof cid === "string" ? cid : "";
+  // 4.10.7: the roster follows the enrollments store, so enrolling on the
+  // Dashboard adds that person here without a reload.
+  const enrollments = useEnrollmentsStore((state) => state.enrollments);
   const enrolled = users.filter((usr) =>
     enrollments.some(
-      (enrollment) => enrollment.user === usr._id && enrollment.course === cid,
+      (enrollment) =>
+        enrollment.user === usr._id && enrollment.course === courseId,
     ),
   );
   return (

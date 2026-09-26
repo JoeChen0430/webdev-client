@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 
@@ -6,11 +8,19 @@ export default function CourseCard({
   name,
   description,
   image,
+  onEdit,
+  onDelete,
+  enrolled,
+  onToggleEnrollment,
 }: {
   _id: string;
   name: string;
   description: string;
   image: string;
+  onEdit: () => void;
+  onDelete: () => void;
+  enrolled?: boolean;
+  onToggleEnrollment?: () => void;
 }) {
   return (
     <div className="wd-dashboard-course w-[300px] max-w-full overflow-hidden rounded-lg border border-neutral-200 bg-white shadow-sm">
@@ -32,12 +42,54 @@ export default function CourseCard({
           <p className="wd-dashboard-course-description m-0 mb-3 h-[100px] overflow-hidden text-sm text-neutral-600">
             {description}
           </p>
-          <button
-            type="button"
-            className="inline-flex items-center justify-center rounded bg-blue-600 px-3 py-1.5 text-sm font-medium text-white"
-          >
-            Go
-          </button>
+          <div className="flex flex-wrap gap-2">
+            <button
+              type="button"
+              className="inline-flex items-center justify-center rounded bg-blue-600 px-3 py-1.5 text-sm font-medium text-white"
+            >
+              Go
+            </button>
+            <button
+              type="button"
+              id="wd-edit-course-click"
+              className="rounded bg-yellow-400 px-3 py-1.5 text-sm font-medium"
+              onClick={(event) => {
+                event.preventDefault();
+                onEdit();
+              }}
+            >
+              Edit
+            </button>
+            <button
+              type="button"
+              id="wd-delete-course-click"
+              className="rounded bg-red-600 px-3 py-1.5 text-sm font-medium text-white"
+              onClick={(event) => {
+                event.preventDefault();
+                onDelete();
+              }}
+            >
+              Delete
+            </button>
+            {/* 4.10.7: enroll / unenroll toggle */}
+            {onToggleEnrollment && (
+              <button
+                type="button"
+                id={enrolled ? "wd-unenroll-click" : "wd-enroll-click"}
+                className={
+                  enrolled
+                    ? "rounded bg-red-700 px-3 py-1.5 text-sm font-medium text-white"
+                    : "rounded bg-green-600 px-3 py-1.5 text-sm font-medium text-white"
+                }
+                onClick={(event) => {
+                  event.preventDefault();
+                  onToggleEnrollment();
+                }}
+              >
+                {enrolled ? "Unenroll" : "Enroll"}
+              </button>
+            )}
+          </div>
         </div>
       </Link>
     </div>
