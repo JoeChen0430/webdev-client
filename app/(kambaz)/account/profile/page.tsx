@@ -9,22 +9,21 @@ const FIELD =
   "mb-2 w-full rounded border border-neutral-300 px-3 py-2 text-sm";
 
 export default function Profile() {
-  const [profile, setProfile] = useState<User | null>(null);
   const { currentUser, setCurrentUser } = useAccountContext();
   const router = useRouter();
+  // The book's §4.10.5.5 copies the current user into local state inside a
+  // useEffect. React 19's set-state-in-effect rule blocks that, so this uses a
+  // lazy initial value to achieve the same thing: the draft starts as the
+  // signed-in user, and editing a field still never writes back to the context.
+  // One render instead of two, and no lint suppression.
+  const [profile, setProfile] = useState<User | null>(currentUser);
 
-  // Section 4.10.5.5 asks for exactly this shape: redirect when nobody is
-  // signed in, otherwise copy the current user into a local draft so editing a
-  // field does not rewrite the context on every keystroke. React 19's
-  // set-state-in-effect rule flags the copy; the cascading render is a single
-  // extra pass on mount, and Chapter 5 replaces this with a real fetch.
+  // The effect now only handles the side effect that genuinely is one:
+  // redirecting when nobody is signed in.
   useEffect(() => {
     if (!currentUser) {
       router.push("/account/signin");
-      return;
     }
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setProfile(currentUser);
   }, [currentUser, router]);
 
   const signout = () => {
