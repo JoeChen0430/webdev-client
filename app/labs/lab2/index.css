@@ -7,14 +7,12 @@
   color: white;
 } */
 
-/* On your own (2.1.2): a second tag rule, applied to every h3 */
-h3 {
+#wd-lab2 h3 {
   background-color: #eef2ff;
   color: #1e3a8a;
 }
 
-/* With AI (2.1.2): sample tag rule for every h2 */
-h2 {
+#wd-lab2 h2 {
   background-color: navy;
   color: white;
 }
@@ -30,13 +28,11 @@ p#wd-id-selector-2 {
   color: black;
 }
 
-/* On your own (2.1.3): a third id with its own scheme */
 p#wd-id-selector-3 {
   background-color: teal;
   color: white;
 }
 
-/* With AI (2.1.3): sample fourth id */
 p#wd-ai-id-selector {
   background-color: #4b0082;
   color: white;
@@ -49,13 +45,11 @@ p#wd-ai-id-selector {
   color: blue;
 }
 
-/* On your own (2.1.4): my own class shared by a p and an h4 */
 .wd-your-class {
   background-color: #064e3b;
   color: #ecfdf5;
 }
 
-/* With AI (2.1.4): sample class shared by a p and an h4 */
 .wd-ai-class-selector {
   background-color: #7c2d12;
   color: #ffedd5;
@@ -72,13 +66,11 @@ p#wd-ai-id-selector {
   color: blue;
 }
 
-/* On your own (2.1.5): direct-child rule for my own extra node */
 .wd-selector-3 > .wd-your-selector-5 {
   background-color: #1e293b;
   color: #f8fafc;
 }
 
-/* With AI (2.1.5): sample descendant rule, any depth */
 .wd-selector-1 .wd-ai-selector-5 {
   background-color: #be185d;
   color: white;
@@ -103,7 +95,6 @@ p#wd-ai-id-selector {
   color: white;
 }
 
-/* On your own (2.1.6): my own conflict - the id rule below wins again */
 .wd-cascade-demo p.wd-your-cascade {
   background-color: orange;
   color: black;
@@ -153,12 +144,10 @@ p#wd-ai-id-selector {
   padding: 50px;
 }
 
-/* On your own (2.1.10): a per-side padding class of my own */
 .wd-padded-right-only {
   padding-right: 80px;
 }
 
-/* With AI (2.1.10): sample padding-top only */
 .wd-ai-padded-top {
   padding-top: 60px;
 }
@@ -211,7 +200,6 @@ p#wd-ai-id-selector {
   box-sizing: border-box;
 }
 
-/* On your own (2.1.10): same padding/border at a wider declared width */
 .wd-box-sizing-content-wide,
 .wd-box-sizing-border-wide {
   width: 300px;
@@ -240,13 +228,11 @@ p#wd-ai-id-selector {
   border-radius: 30px 0px 20px 50px;
 }
 
-/* On your own (2.1.11): only the right corners, larger radius */
 .wd-your-rounded-right {
   border-top-right-radius: 60px;
   border-bottom-right-radius: 60px;
 }
 
-/* With AI (2.1.11): sample left-corners-only rounding */
 .wd-ai-rounded-left {
   border-top-left-radius: 40px;
   border-bottom-left-radius: 40px;
@@ -267,14 +253,12 @@ p#wd-ai-id-selector {
   height: 75px;
 }
 
-/* On your own (2.1.12): a fixed box that keeps its size regardless of text */
 .wd-your-dimension-wide {
   width: 160px;
   height: 90px;
   overflow: hidden;
 }
 
-/* With AI (2.1.12): sample sized box */
 .wd-ai-dimension {
   width: 120px;
   height: 60px;
@@ -317,14 +301,12 @@ p#wd-ai-id-selector {
   position: relative;
 }
 
-/* On your own (2.1.13): my own nudge, down and left */
 .wd-your-pos-relative-nudge {
   position: relative;
   top: 25px;
   right: 35px;
 }
 
-/* With AI (2.1.13): sample nudge */
 .wd-ai-pos-relative-nudge {
   position: relative;
   top: 15px;
@@ -349,14 +331,12 @@ p#wd-ai-id-selector {
   left: 120px;
 }
 
-/* On your own (2.1.14): pinned to the top-right corner */
 .wd-your-pos-absolute-tr {
   position: absolute;
   top: 10px;
   right: 10px;
 }
 
-/* With AI (2.1.14): sample bottom-right pin */
 .wd-ai-pos-absolute-br {
   position: absolute;
   right: 10px;
@@ -371,7 +351,6 @@ p#wd-ai-id-selector {
   bottom: 50%;
 }
 
-/* On your own (2.1.15): my own badge, pinned top-right of the viewport */
 .wd-your-pos-fixed {
   position: fixed;
   top: 10px;
@@ -380,7 +359,6 @@ p#wd-ai-id-selector {
   z-index: 30;
 }
 
-/* With AI (2.1.15): sample badge, bottom-left of the viewport */
 .wd-ai-pos-fixed {
   position: fixed;
   left: 0;
@@ -395,15 +373,13 @@ p#wd-ai-id-selector {
   z-index: 10;
 }
 
-/* On your own (2.1.16): deliberately sent behind the stack */
 .wd-your-zindex-back {
   z-index: 1;
   position: absolute;
   top: 40px;
-  left: 150px;
+  left: 120px;
 }
 
-/* With AI (2.1.16): sample box stacked above everything in the demo */
 .wd-ai-zindex-top {
   z-index: 20;
   position: absolute;
@@ -448,7 +424,6 @@ img.wd-float-right {
 .wd-grid-col-main-content { width: 60%; float: left; }
 .wd-grid-col-right-sidebar { width: 20%; float: left; }
 
-/* On your own (2.1.18): a quarter column for a 1/4 + 3/4 row */
 .wd-grid-col-quarter-page { width: 25%; float: left; }
 .wd-grid-col-three-quarters-page { width: 75%; float: left; }
 
@@ -466,7 +441,7 @@ img.wd-float-right {
 .wd-flex-grow-1 {
   flex-grow: 1;
 }
-.wd-width-75px {
+.wd-width-110px {
   /* Room for "Column 1" + 10px padding under border-box */
   width: 110px;
   flex-shrink: 0;

@@ -16,7 +16,6 @@
   text-decoration: underline;
 }
 
-/* With AI: sample breakpoint below 750px */
 @media (max-width: 749px) {
   .wd-media-queries-demo {
     background-color: purple;
@@ -69,7 +68,6 @@
   }
 }
 
-/* On your own: my own breakpoint, splitting the old 1250px-and-up range */
 @media (min-width: 1250px) and (max-width: 1600px) {
   .wd-media-queries-demo {
     background-color: red;

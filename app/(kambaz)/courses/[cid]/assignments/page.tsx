@@ -67,14 +67,12 @@ export default async function Assignments({
           title="A3 - JAVASCRIPT + REACT"
           details="Multiple Modules | Not available until May 20 at 12:00am | Due May 27 at 11:59pm | 100 pts"
         />
-        {/* On your own: my own assignment row */}
         <AssignmentItem
           cid={cid}
           aid="126"
           title="A4 - NODE + MONGODB"
           details="Multiple Modules | Not available until May 27 at 12:00am | Due June 3 at 11:59pm | 100 pts"
         />
-        {/* With AI: sample assignment row */}
         <AssignmentItem
           cid={cid}
           aid="ai-a"

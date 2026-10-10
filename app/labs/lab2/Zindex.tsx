@@ -12,15 +12,12 @@ export default function Zindex() {
         <div className="wd-pos-absolute-120-20 wd-bg-color-red wd-dimension-square">
           Square
         </div>
-        {/* On your own: declared last but z-index 1 keeps it behind the blue
-            landscape box, which sits at z-index 10 */}
         <div
           id="wd-your-zindex"
           className="wd-your-zindex-back wd-bg-color-green wd-fg-color-white wd-dimension-landscape"
         >
           Behind
         </div>
-        {/* With AI: sample box stacked above the whole demo */}
         <div
           id="wd-ai-zindex"
           className="wd-ai-zindex-top wd-bg-color-red wd-fg-color-white wd-dimension-square"

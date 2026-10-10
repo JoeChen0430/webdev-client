@@ -9,14 +9,13 @@ export default function Dashboard() {
       </h1>
       <hr />
       <h2 id="wd-dashboard-published" className="my-3 text-xl font-semibold">
-        Published Courses (4)
+        Published Courses (5)
       </h2>
       <hr className="mb-4" />
       <div
         id="wd-dashboard-courses"
         className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
       >
-        {/* On your own: my own course card */}
         <CourseCard
           id="4550"
           title="CS4550 Web Development"
@@ -41,7 +40,6 @@ export default function Dashboard() {
           subtitle="NoSQL Databases"
           image="/images/mongodb.png"
         />
-        {/* With AI: sample fourth card */}
         <CourseCard
           id="CS9999"
           title="CS9999 Sample Course"

@@ -19,7 +19,6 @@ export default function Signin() {
         className={`wd-password ${FIELD}`}
         defaultValue="123"
       />
-      {/* With AI: sample note field, same full-width utilities */}
       <input
         id="wd-ai-signin-note"
         placeholder="sample note"

@@ -20,16 +20,15 @@ export default function Flex() {
 
       {/* Pinned first column plus a growing last column */}
       <div className="wd-flex-row-container">
-        <div className="wd-width-75px wd-bg-color-yellow">Column 1</div>
+        <div className="wd-width-110px wd-bg-color-yellow">Column 1</div>
         <div className="wd-bg-color-blue wd-fg-color-white">Column 2</div>
         <div className="wd-flex-grow-1 wd-bg-color-red wd-fg-color-white">
           Column 3
         </div>
       </div>
 
-      {/* On your own: fourth row - column 1 pinned at 110px, column 3 grows */}
       <div id="wd-your-flex" className="wd-flex-row-container">
-        <div className="wd-width-75px wd-bg-color-green wd-fg-color-white">
+        <div className="wd-width-110px wd-bg-color-green wd-fg-color-white">
           Column 1
         </div>
         <div className="wd-bg-color-yellow">Column 2</div>
@@ -38,9 +37,8 @@ export default function Flex() {
         </div>
       </div>
 
-      {/* With AI: sample grow/pin row */}
       <div id="wd-ai-flex" className="wd-flex-row-container">
-        <div className="wd-width-75px wd-bg-color-red wd-fg-color-white">
+        <div className="wd-width-110px wd-bg-color-red wd-fg-color-white">
           Column 1
         </div>
         <div className="wd-bg-color-gray">Column 2</div>

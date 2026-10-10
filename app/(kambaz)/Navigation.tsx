@@ -6,7 +6,7 @@ import { AiOutlineDashboard } from "react-icons/ai";
 import { FaRegCircleUser, FaCircleQuestion } from "react-icons/fa6";
 import { LiaBookSolid } from "react-icons/lia";
 import { IoCalendarOutline } from "react-icons/io5";
-import { FaInbox } from "react-icons/fa";
+import { MdOutlineMail } from "react-icons/md";
 import { LiaCogSolid } from "react-icons/lia";
 import "@/app/labs/lab2/tailwind/utilities.css";
 
@@ -81,7 +81,7 @@ export default function KambazNavigation() {
         id="wd-inbox-link"
         className={isActive("/inbox") ? TILE_ACTIVE : TILE_IDLE}
       >
-        <FaInbox className="inline-block text-3xl text-red-600" />
+        <MdOutlineMail className="inline-block text-3xl text-red-600" />
         <br />
         Inbox
       </Link>
@@ -94,7 +94,6 @@ export default function KambazNavigation() {
         <br />
         Labs
       </Link>
-      {/* With AI: sample help tile */}
       <Link href="/labs" id="wd-ai-nav-help" className={TILE_IDLE}>
         <FaCircleQuestion className="inline-block text-3xl text-red-600" />
         <br />

@@ -19,12 +19,10 @@ export default function ReactIconsSampler() {
         <FaEnvelopeOpenText />
         <FaRegClock />
       </div>
-      {/* On your own: two more icons from families not used above (bs, io5) */}
       <div id="wd-your-icons" className="flex gap-3 text-4xl text-green-700">
         <BsRocketTakeoff />
         <IoLanguage />
       </div>
-      {/* With AI: two sample icons from md and hi2 */}
       <div id="wd-ai-icons" className="flex gap-3 text-4xl text-blue-600">
         <MdOutlineSchool />
         <HiOutlineSparkles />

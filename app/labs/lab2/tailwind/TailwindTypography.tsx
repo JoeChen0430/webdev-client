@@ -17,11 +17,9 @@ export default function TailwindTypography() {
       <p className="font-bold">This is bold font weight.</p>
       <p className="font-extrabold">This is extra-bold font weight.</p>
       <p className="font-black">This is black font weight.</p>
-      {/* On your own: a size and weight pair not used above */}
       <p id="wd-your-type" className="text-xl font-semibold mt-4">
         I am taking this course to get comfortable shipping full stack apps.
       </p>
-      {/* With AI: sample size and weight pair */}
       <p id="wd-ai-type" className="text-2xl font-medium">
         A sample line pairing text-2xl with font-medium.
       </p>

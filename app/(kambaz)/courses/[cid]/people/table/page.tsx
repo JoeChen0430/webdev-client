@@ -59,7 +59,6 @@ const PEOPLE: Person[] = [
     lastActivity: "2020-11-15",
     totalActivity: "40:12:18",
   },
-  // On your own: three more people I added
   {
     name: "Yi-Jhao Chen",
     loginId: "001234567S",
@@ -84,7 +83,6 @@ const PEOPLE: Person[] = [
     lastActivity: "2026-09-15",
     totalActivity: "22:03:51",
   },
-  // With AI: three sample roster rows
   {
     name: "Jane Sample",
     loginId: "001234570S",

@@ -3,8 +3,6 @@
 export default function TailwindResponsiveDesign() {
   return (
     <div>
-      {/* On your own: personal copy, plus lg:p-12 so the text column's padding
-          clearly changes again at the lg breakpoint */}
       <div className="mx-auto max-w-md overflow-hidden rounded-xl bg-white shadow-md md:max-w-2xl">
         <div className="md:flex">
           <div className="md:shrink-0">
@@ -33,7 +31,6 @@ export default function TailwindResponsiveDesign() {
         </div>
       </div>
 
-      {/* With AI: sample card with an extra breakpoint utility */}
       <div
         id="wd-ai-responsive"
         className="mx-auto mt-6 max-w-md overflow-hidden rounded-xl bg-white shadow-md md:max-w-2xl md:bg-indigo-50"

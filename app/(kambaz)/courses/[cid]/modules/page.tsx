@@ -79,7 +79,6 @@ export default function Modules() {
             <li className="wd-content-item">CSS Selectors and the box model</li>
           </Lesson>
         </Module>
-        {/* On your own: my own module */}
         <Module title="Week 4, Lecture 4 - Tailwind and Responsive Layouts">
           <Lesson title="LEARNING OBJECTIVES">
             <li className="wd-content-item">
@@ -95,7 +94,6 @@ export default function Modules() {
             </li>
           </Lesson>
         </Module>
-        {/* With AI: sample module */}
         <Module title="Sample module (AI)">
           <Lesson title="Sample lesson (AI)">
             <li className="wd-content-item">

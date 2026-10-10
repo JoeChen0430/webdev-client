@@ -50,7 +50,6 @@ export default function TailwindGrids() {
             <h3>Sidebar</h3>
           </div>
         </div>
-        {/* On your own: three equal columns on a twelve-column grid */}
         <div id="wd-your-grid" className="grid grid-cols-12 gap-2 mt-2">
           <div className="col-span-4 bg-teal-500 text-white">
             <h3>Equal one</h3>
@@ -62,7 +61,6 @@ export default function TailwindGrids() {
             <h3>Equal three</h3>
           </div>
         </div>
-        {/* With AI: sample 3/9 split */}
         <div id="wd-ai-grid" className="grid grid-cols-12 gap-2 mt-2">
           <div className="col-span-3 bg-purple-500 text-white">
             <h3>Three columns</h3>

@@ -156,7 +156,6 @@ export default async function AssignmentEditor({
         </div>
       </fieldset>
 
-      {/* With AI: sample notes field */}
       <div className="mt-4">
         <label htmlFor="wd-ai-editor-notes" className={LABEL}>
           Sample notes

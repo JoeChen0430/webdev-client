@@ -11,7 +11,6 @@ export default function TailwindFilters() {
         <img className="blur-lg w-1/4" src={src} alt="blur lg" />
         <img className="blur-2xl w-1/4" src={src} alt="blur 2xl" />
       </div>
-      {/* On your own: a different filter family - contrast and saturation */}
       <h3 id="wd-your-filters" className="mt-6">
         Contrast and saturation
       </h3>
@@ -21,8 +20,7 @@ export default function TailwindFilters() {
         <img className="saturate-50 w-1/4" src={src} alt="saturate 50" />
         <img className="saturate-150 w-1/4" src={src} alt="saturate 150" />
       </div>
-      {/* With AI: sample grayscale and brightness row */}
-      <h3 id="wd-ai-filters" className="mt-6">
+      <h3 id="wd-ai-filters" className="mt-6 text-lg font-bold">
         Grayscale and brightness
       </h3>
       <div className="flex">

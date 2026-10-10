@@ -50,7 +50,6 @@ export default function CourseStatus() {
       <button type="button" className={FULL_WIDTH_BUTTON}>
         <FaBell className="me-2 shrink-0 text-base" /> View Course Notifications
       </button>
-      {/* On your own: my own status action */}
       <button
         id="wd-your-status"
         type="button"
@@ -59,7 +58,6 @@ export default function CourseStatus() {
         <FaFileImport className="me-2 shrink-0 text-base" /> Export Course
         Syllabus
       </button>
-      {/* With AI: sample status action */}
       <button id="wd-ai-status" type="button" className={FULL_WIDTH_BUTTON}>
         <AiOutlineFileSearch className="me-2 shrink-0 text-base" /> Sample
         action

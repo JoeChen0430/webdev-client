@@ -18,8 +18,6 @@ export default function Float() {
         <div className="wd-float-done" />
       </div>
 
-      {/* On your own: a colored box floated left, text wrapping beside it,
-          ended with a clear: both element */}
       <div>
         <div
           id="wd-your-float"
@@ -31,7 +29,6 @@ export default function Float() {
         <div className="wd-float-done" />
       </div>
 
-      {/* With AI: sample box floated right with wrapping text */}
       <div>
         <div
           id="wd-ai-float"

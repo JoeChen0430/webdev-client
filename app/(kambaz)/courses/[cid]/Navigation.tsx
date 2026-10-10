@@ -63,7 +63,6 @@ export default function CourseNavigation({ cid }: { cid: string }) {
           {link.label}
         </Link>
       ))}
-      {/* With AI: sample course link, always idle styling */}
       <Link href={`/courses/${cid}/home`} id="wd-course-ai-link" className={IDLE}>
         Sample
       </Link>

@@ -30,8 +30,6 @@ export default function Display() {
           Block 3
         </span>
       </div>
-      {/* On your own: a div forced to display inline - its 150px width is
-          ignored, exactly like the inline spans above */}
       <h3>Inline div</h3>
       <div>
         <div
@@ -41,7 +39,6 @@ export default function Display() {
           This div is display:inline, so its width is ignored
         </div>
       </div>
-      {/* With AI: sample inline div */}
       <div id="wd-ai-display" className="wd-display-inline wd-bg-color-yellow">
         Sample inline div - width ignored
       </div>

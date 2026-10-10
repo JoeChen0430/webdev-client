@@ -21,7 +21,6 @@ export default function GridLayout() {
           <h3>Side bar</h3>
         </div>
       </div>
-      {/* On your own: a quarter / three-quarters row */}
       <div id="wd-your-grid" className="wd-grid-row">
         <div className="wd-grid-col-quarter-page wd-bg-color-green wd-fg-color-white">
           <h3>One quarter</h3>
@@ -30,7 +29,6 @@ export default function GridLayout() {
           <h3>Three quarters</h3>
         </div>
       </div>
-      {/* With AI: sample third / two-thirds row */}
       <div id="wd-ai-grid" className="wd-grid-row">
         <div className="wd-grid-col-third-page wd-bg-color-red wd-fg-color-white">
           <h3>Left third</h3>

@@ -14,13 +14,11 @@ export default function TailwindSpacing() {
         padding of 8.
       </div>
       <div className="bg-green-200 p-6">This div has padding all around of 6.</div>
-      {/* On your own: directional margin and padding mixed together */}
       <div id="wd-your-spacing" className="bg-amber-200 mt-8 ms-12 pt-6 pe-10 pb-2">
         My box: top margin 8 and start margin 12 push it away from its
         neighbours, while top padding 6, end padding 10, and bottom padding 2
         move the text inward by different amounts on each side.
       </div>
-      {/* With AI: sample directional spacing mix */}
       <div id="wd-ai-spacing" className="bg-purple-200 mt-6 ps-8 pb-4">
         A sample box mixing mt-6, ps-8, and pb-4 so the directional spacing is
         obvious.

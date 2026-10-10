@@ -11,14 +11,12 @@ export default function Positions() {
             Landscape
           </div>
           <div className="wd-bg-color-red wd-dimension-square">Square</div>
-          {/* On your own: nudged down and left, neighbors do not reflow */}
           <div
             id="wd-your-relative"
             className="wd-your-pos-relative-nudge wd-bg-color-green wd-fg-color-white wd-dimension-square"
           >
             Mine
           </div>
-          {/* With AI: sample nudge */}
           <div
             id="wd-ai-relative"
             className="wd-ai-pos-relative-nudge wd-bg-color-yellow wd-dimension-landscape"
@@ -40,14 +38,12 @@ export default function Positions() {
           <div className="wd-pos-absolute-120-20 wd-bg-color-red wd-dimension-square">
             Square
           </div>
-          {/* On your own: pinned to the top-right corner of the relative parent */}
           <div
             id="wd-your-absolute"
             className="wd-your-pos-absolute-tr wd-bg-color-green wd-fg-color-white wd-dimension-square"
           >
             Top right
           </div>
-          {/* With AI: sample bottom-right pin */}
           <div
             id="wd-ai-absolute"
             className="wd-ai-pos-absolute-br wd-bg-color-yellow wd-dimension-square"
@@ -65,14 +61,12 @@ export default function Positions() {
         <div className="wd-pos-fixed wd-dimension-square wd-bg-color-blue wd-fg-color-white">
           Fixed position
         </div>
-        {/* On your own: my own fixed badge, top-right of the viewport */}
         <div
           id="wd-your-fixed"
           className="wd-your-pos-fixed wd-bg-color-green wd-fg-color-white"
         >
           My badge
         </div>
-        {/* With AI: sample fixed badge, bottom-left of the viewport */}
         <div
           id="wd-ai-fixed"
           className="wd-ai-pos-fixed wd-bg-color-red wd-fg-color-white"
