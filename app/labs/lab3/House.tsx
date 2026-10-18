@@ -3,7 +3,6 @@ export default function House() {
     bedrooms: 4,
     bathrooms: 2.5,
     squareFeet: 2000,
-    // On your own: yearBuilt
     yearBuilt: 1998,
     address: {
       street: "Via Roma",
@@ -13,13 +12,10 @@ export default function House() {
       country: "Italy",
     },
     owners: ["Alice", "Bob"],
-    // With AI: sample nested garage object
     garage: { cars: 2 },
   };
   console.log(house);
-  // On your own: log the owners array
   console.log(house.owners);
-  // With AI: log one extra field
   console.log(house.address.city);
   return (
     <div id="wd-house">
@@ -28,6 +24,8 @@ export default function House() {
       {house.bedrooms}
       <h5>bathrooms</h5>
       {house.bathrooms}
+      <h5>owners</h5>
+      {house.owners.join(", ")}
       <h5>yearBuilt</h5>
       {house.yearBuilt}
       <h5>garage cars</h5>

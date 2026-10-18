@@ -34,6 +34,12 @@ const LINKS = [
     label: "Kambaz",
     match: () => false,
   },
+  {
+    href: "https://kambaz.dev/book/ch3",
+    id: "wd-book-ch3-link",
+    label: "Book Ch3",
+    match: () => false,
+  },
 ] as const;
 
 const ACTIVE = "rounded bg-blue-600 px-2 py-0.5 text-white no-underline";

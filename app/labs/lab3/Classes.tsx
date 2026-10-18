@@ -3,7 +3,7 @@ import "./Classes.css";
 export default function Classes() {
   const color = "blue";
   const dangerous = true;
-  // With AI: sample dynamic shade
+  const sunny = true;
   const shade = "green";
   return (
     <div id="wd-classes">
@@ -24,6 +24,11 @@ export default function Classes() {
         className={`${dangerous ? "wd-bg-red" : "wd-bg-green"} wd-fg-black wd-padding-10px`}
       >
         Dangerous background
+      </div>
+      <div
+        className={`${sunny ? "wd-bg-yellow" : "wd-bg-green"} wd-fg-black wd-padding-10px`}
+      >
+        {sunny ? "Yellow" : "Green"} background
       </div>
       <div className={`wd-bg-${shade} wd-fg-black wd-padding-10px`}>
         Dynamic Green background

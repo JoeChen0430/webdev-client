@@ -54,6 +54,15 @@
     "description": "Write up the results of the wind tunnel experiment."
   },
   {
+    "_id": "A203",
+    "title": "A3 - Lift and Drag Lab",
+    "course": "RS102",
+    "points": 100,
+    "due": "2024-05-29",
+    "available": "2024-05-22",
+    "description": "Measure lift and drag coefficients in the lab."
+  },
+  {
     "_id": "A204",
     "title": "A4",
     "course": "RS102",

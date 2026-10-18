@@ -8,7 +8,7 @@ export default function ClientComponentDemo() {
     <div id="wd-client-component-demo">
       <h1>Client Component Demo</h1>
       <p>Current pathname: {pathname}</p>
-      {/* With AI: sample extra pathname snippet */}
+      <p>Pathname length: {pathname.length}</p>
       <p>Last segment: {pathname.split("/").pop()}</p>
     </div>
   );

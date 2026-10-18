@@ -9,7 +9,6 @@ export default function Breadcrumb({
 }) {
   const pathname = usePathname() ?? "";
   const section = pathname.split("/").pop() ?? "";
-  // With AI: the People screen lives at people/table, so relabel that segment
   const label =
     section === "table"
       ? "People"

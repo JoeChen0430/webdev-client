@@ -14,7 +14,6 @@ const LINKS = [
   { label: "Calendar", path: "/calendar", icon: IoCalendarOutline },
   { label: "Inbox", path: "/inbox", icon: FaInbox },
   { label: "Labs", path: "/labs", icon: LiaCogSolid },
-  // With AI: sample sidebar item, driven from LINKS like the rest
   { label: "History", path: "/history", icon: IoCalendarOutline },
 ] as const;
 
@@ -53,8 +52,8 @@ export default function KambazNavigation() {
       </Link>
       {LINKS.map((link) => {
         const active =
-          link.label === "Dashboard" || link.label === "Courses"
-            ? pathname.includes("/dashboard") || pathname.includes("/courses")
+          link.label === "Courses"
+            ? pathname.includes("/courses")
             : pathname.includes(link.path);
         const Icon = link.icon;
         return (

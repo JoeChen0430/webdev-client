@@ -16,10 +16,11 @@ export default function NullUndefined() {
       <br />
       String(undefined) = {String(undefined)}
       <br />
-      {/* With AI: the two comparisons, matching the console experiment */}
       null == undefined = {String(null == undefined)}
       <br />
       null === undefined = {String(null === undefined)}
+      <br />
+      nullValue ?? &quot;default&quot; = {nullValue ?? "default"}
       <hr />
     </div>
   );
