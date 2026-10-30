@@ -23,7 +23,6 @@ export default function ContextCounterWrite() {
       >
         Down
       </button>
-      {/* On your own: my own reset through the context setter */}
       <button
         type="button"
         onClick={() => setCount(7)}
@@ -32,7 +31,6 @@ export default function ContextCounterWrite() {
       >
         Reset to 7
       </button>
-      {/* With AI: sample reset */}
       <button
         type="button"
         onClick={() => setCount(7)}

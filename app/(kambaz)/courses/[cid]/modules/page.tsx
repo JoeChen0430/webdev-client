@@ -28,7 +28,6 @@ export default function Modules() {
         moduleName={moduleName}
         setModuleName={setModuleName}
         addModule={() => {
-          // With AI: skip empty names
           if (!moduleName.trim()) return;
           addModule({ name: moduleName, course: courseId });
           setModuleName("");

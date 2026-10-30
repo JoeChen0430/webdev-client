@@ -26,7 +26,6 @@ export default function CounterRedux() {
       >
         Down
       </button>
-      {/* On your own: my own reset action */}
       <button
         type="button"
         onClick={() => dispatch(resetToSeven())}
@@ -35,7 +34,6 @@ export default function CounterRedux() {
       >
         Reset to 7
       </button>
-      {/* With AI: sample reset action */}
       <button
         type="button"
         onClick={() => dispatch(reset())}

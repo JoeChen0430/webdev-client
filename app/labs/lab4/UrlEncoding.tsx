@@ -10,7 +10,6 @@ const FIELD =
 export default function UrlEncoding() {
   const [a, setA] = useState("5");
   const [b, setB] = useState("10");
-  // On your own / With AI: a third number c
   const [c, setC] = useState("2");
   const router = useRouter();
   const baseUrl = "/labs/lab4/url-encoding";

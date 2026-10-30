@@ -43,14 +43,12 @@ export const useTodoStore = create<TodoStore>((set) => ({
       todos: state.todos.map((t) => (t.id === todo.id ? todo : t)),
       todo: emptyTodo,
     })),
-  // With AI: sample toggle action
   toggleDone: (id) =>
     set((state) => ({
       todos: state.todos.map((t) =>
         t.id === id ? { ...t, done: !t.done } : t,
       ),
     })),
-  // On your own: drop every completed todo
   clearDone: () =>
     set((state) => ({ todos: state.todos.filter((t) => !t.done) })),
 }));

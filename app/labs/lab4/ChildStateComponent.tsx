@@ -26,7 +26,6 @@ export default function ChildStateComponent({
       >
         Decrement
       </button>
-      {/* On your own: reset using the parent's setter */}
       <button
         type="button"
         onClick={() => setCounter(123)}
@@ -35,7 +34,6 @@ export default function ChildStateComponent({
       >
         Reset to 123
       </button>
-      {/* With AI: sample reset */}
       <button
         type="button"
         onClick={() => setCounter(123)}

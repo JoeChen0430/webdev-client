@@ -27,9 +27,12 @@ export default function AssignmentEditor() {
     (state) => state.updateAssignment,
   );
 
-  // "new" opens a blank draft; any other id loads that assignment.
+  // "new" opens a blank draft; any other id loads that assignment, but only
+  // if it belongs to the current course.
   const isNew = assignmentId === "new";
-  const existing = assignments.find((a) => a._id === assignmentId);
+  const existing = assignments.find(
+    (a) => a._id === assignmentId && a.course === courseId,
+  );
   const [assignment, setAssignment] = useState<Assignment>(
     isNew ? emptyAssignment(courseId) : (existing ?? emptyAssignment(courseId)),
   );
@@ -59,7 +62,6 @@ export default function AssignmentEditor() {
         />
       </div>
 
-      {/* With AI (ch3): show which assignment the URL selected */}
       <p id="wd-ai-assignment-id" className="mb-4 text-sm text-neutral-600">
         Assignment id: {assignmentId}
       </p>
@@ -212,9 +214,9 @@ export default function AssignmentEditor() {
             <input
               type="date"
               id="wd-available-until"
-              value={assignment.due}
+              value={assignment.until}
               onChange={(e) =>
-                setAssignment({ ...assignment, due: e.target.value })
+                setAssignment({ ...assignment, until: e.target.value })
               }
               className={FIELD}
             />
@@ -222,7 +224,6 @@ export default function AssignmentEditor() {
         </div>
       </fieldset>
 
-      {/* With AI (ch2): sample notes field */}
       <div className="mt-4">
         <label htmlFor="wd-ai-editor-notes" className={LABEL}>
           Sample notes

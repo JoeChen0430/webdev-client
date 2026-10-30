@@ -3,7 +3,6 @@
 import { useDispatch } from "react-redux";
 import { deleteTodo, type ReduxTodo } from "./todosReducer";
 
-// On your own (4.6.4): the item half of the ReduxTodos split
 export default function ReduxTodoItem({
   todo,
   setTitle,

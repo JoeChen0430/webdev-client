@@ -7,9 +7,7 @@ const FIELD =
 
 export default function StringStateVariables() {
   const [firstName, setFirstName] = useState("John");
-  // On your own: a last name string
   const [lastName, setLastName] = useState("Doe");
-  // With AI: sample nickname
   const [nickName, setNickName] = useState("JD");
   return (
     <div id="wd-string-state-variables">

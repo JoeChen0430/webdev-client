@@ -23,11 +23,9 @@ export default function Lab4() {
   const sayHello = () => {
     alert("Hello from Lab 4");
   };
-  // On your own: a second function that alerts my name
   const sayMyName = () => {
     alert("Yi-Jhao Chen");
   };
-  // With AI: sample function from the parent
   const saySample = () => {
     alert("Sample from parent");
   };

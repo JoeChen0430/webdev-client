@@ -56,7 +56,6 @@ export default function Signin() {
           setCredentials({ ...credentials, password: e.target.value })
         }
       />
-      {/* With AI (ch2): sample note field, same full-width utilities */}
       <input
         id="wd-ai-signin-note"
         placeholder="sample note"

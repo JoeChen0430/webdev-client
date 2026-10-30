@@ -4,12 +4,10 @@ const hello = () => {
   alert("Hello World!");
 };
 
-// On your own: a greeting with my name
 const greetMe = () => {
   alert("Hello, Yi-Jhao Chen!");
 };
 
-// With AI: sample goodbye handler
 const goodbye = () => {
   alert("Goodbye World!");
 };

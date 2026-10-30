@@ -12,6 +12,7 @@ export const emptyAssignment = (course: string): Assignment => ({
   points: 100,
   due: "2024-05-13",
   available: "2024-05-06",
+  until: "2024-05-13",
   description: "New Description",
 });
 

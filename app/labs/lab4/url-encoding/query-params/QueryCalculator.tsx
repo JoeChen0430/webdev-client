@@ -6,7 +6,6 @@ export default function QueryCalculator() {
   const searchParams = useSearchParams();
   const aRaw = searchParams.get("a") || "0";
   const bRaw = searchParams.get("b") || "0";
-  // On your own / With AI: a third number c
   const cRaw = searchParams.get("c") || "0";
   const a = parseFloat(aRaw);
   const b = parseFloat(bRaw);

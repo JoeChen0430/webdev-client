@@ -8,8 +8,6 @@ export default function Effect() {
 
   useEffect(() => {
     document.title = `${name} — clicked ${count}`;
-    // On your own / With AI: log from the same effect so you can see when it
-    // runs. One effect, not two.
     console.log(name, count);
   }, [name, count]);
 

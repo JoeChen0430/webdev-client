@@ -34,7 +34,6 @@ export default function ModuleEditor({
             value={moduleName}
             onChange={(e) => setModuleName(e.target.value)}
             id="wd-add-module-name"
-            /* With AI: sample placeholder on the name input */
             placeholder="Module name"
           />
         </div>

@@ -28,7 +28,6 @@ export default function PassingDataOnEvent() {
       >
         Pass Data Parameter
       </button>
-      {/* On your own: my own string */}
       <button
         type="button"
         onClick={() => lifeIs("Taiwan night markets are the best!")}
@@ -37,7 +36,6 @@ export default function PassingDataOnEvent() {
       >
         Pass My String
       </button>
-      {/* With AI: sample extra string */}
       <button
         type="button"
         onClick={() => lifeIs("Web Development")}

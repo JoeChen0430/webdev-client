@@ -3,7 +3,6 @@
 import { useDispatch } from "react-redux";
 import { addTodo, updateTodo } from "./todosReducer";
 
-// On your own (4.6.4): the form half of the ReduxTodos split
 export default function ReduxTodoForm({
   title,
   setTitle,

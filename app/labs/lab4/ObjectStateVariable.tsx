@@ -9,9 +9,7 @@ export default function ObjectStateVariable() {
   const [person, setPerson] = useState({
     name: "Peter",
     age: 24,
-    // On your own: my own property
     country: "Taiwan",
-    // With AI: sample property
     city: "Boston",
   });
   return (

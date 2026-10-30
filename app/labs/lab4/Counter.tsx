@@ -23,7 +23,6 @@ export default function Counter() {
       >
         Down
       </button>
-      {/* On your own: my own reset */}
       <button
         type="button"
         onClick={() => setCount(7)}
@@ -32,7 +31,6 @@ export default function Counter() {
       >
         Reset to 7
       </button>
-      {/* With AI: sample reset */}
       <button
         type="button"
         onClick={() => setCount(7)}

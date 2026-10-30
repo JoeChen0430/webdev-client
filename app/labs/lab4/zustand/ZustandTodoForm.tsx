@@ -32,7 +32,6 @@ export default function ZustandTodoForm() {
       >
         Update
       </button>
-      {/* On your own: clear every completed todo */}
       <button
         type="button"
         onClick={clearDone}

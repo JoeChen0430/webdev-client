@@ -12,7 +12,6 @@ export default function ZustandTodoItem({ todo }: { todo: Todo }) {
       className="mb-1 flex items-center justify-between rounded border border-neutral-200 px-3 py-1"
     >
       <label className="flex items-center gap-2">
-        {/* With AI: the checkbox now toggles instead of being read-only */}
         <input
           type="checkbox"
           checked={todo.done}

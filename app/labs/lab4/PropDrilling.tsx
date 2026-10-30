@@ -27,7 +27,6 @@ function Grandchild({
   );
 }
 
-// With AI: sample forwarding layer - only forwards, never reads count
 function Middle({
   count,
   setCount,
@@ -46,7 +45,6 @@ function Middle({
   );
 }
 
-// On your own: one more forwarding layer between Child and Middle
 function Relay({
   count,
   setCount,

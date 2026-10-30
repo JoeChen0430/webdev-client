@@ -18,7 +18,6 @@ export default function ContextExamples() {
         <ContextCounterRead />
         <ContextCounterWrite />
       </CounterProvider>
-      {/* On your own: the Context todo list from 4.4.2 */}
       <TodosProvider>
         <ReactContextTodoList />
       </TodosProvider>

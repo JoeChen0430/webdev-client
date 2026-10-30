@@ -20,7 +20,6 @@ export default function PassingFunctions({
       >
         Invoke the Function
       </button>
-      {/* On your own: a second function from the parent that alerts my name */}
       <button
         type="button"
         onClick={theNameFunction}
@@ -29,7 +28,6 @@ export default function PassingFunctions({
       >
         Invoke My Name Function
       </button>
-      {/* With AI: sample extra function prop */}
       <button
         type="button"
         onClick={theOtherFunction}

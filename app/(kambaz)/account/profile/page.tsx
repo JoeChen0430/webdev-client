@@ -67,7 +67,6 @@ export default function Profile() {
         value={profile.email}
         onChange={(e) => setProfile({ ...profile, email: e.target.value })}
       />
-      {/* On your own: the login id and section also come from the signed-in user */}
       <input
         id="wd-loginid"
         className={FIELD}

@@ -89,7 +89,6 @@ export default function Dashboard() {
         onChange={(e) => setCourse({ ...course, description: e.target.value })}
         id="wd-course-description"
       />
-      {/* On your own: number and start date on the course form */}
       <input
         className={FIELD}
         value={course.number}
@@ -103,7 +102,6 @@ export default function Dashboard() {
         onChange={(e) => setCourse({ ...course, startDate: e.target.value })}
         id="wd-course-start-date"
       />
-      {/* With AI: sample course-number field */}
       <input
         className="mb-3 block w-full max-w-xl rounded border border-neutral-300 px-3 py-1.5"
         value={course.number}

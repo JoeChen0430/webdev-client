@@ -2,7 +2,6 @@
 
 import { useParams } from "next/navigation";
 
-// On your own: a third path segment [c]
 export default function PathCalculatorThree() {
   const params = useParams();
   const aRaw = params.a as string;

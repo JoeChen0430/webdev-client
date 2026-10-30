@@ -21,7 +21,6 @@ export default function ArrayStateVariable() {
       >
         Add Element
       </button>
-      {/* On your own: my own clear button */}
       <button
         type="button"
         onClick={() => setArray([1, 2, 3, 4, 5])}
@@ -30,7 +29,6 @@ export default function ArrayStateVariable() {
       >
         Reset List
       </button>
-      {/* With AI: sample clear button */}
       <button
         type="button"
         onClick={() => setArray([1, 2, 3, 4, 5])}

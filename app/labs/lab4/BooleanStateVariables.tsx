@@ -4,9 +4,7 @@ import { useState } from "react";
 
 export default function BooleanStateVariables() {
   const [done, setDone] = useState(true);
-  // On your own: a second boolean with its own message
   const [urgent, setUrgent] = useState(false);
-  // With AI: sample boolean
   const [saved, setSaved] = useState(false);
   return (
     <div id="wd-boolean-state-variables">

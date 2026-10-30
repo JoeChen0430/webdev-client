@@ -13,9 +13,7 @@ const FIELD = "mb-2 block rounded border border-neutral-300 px-3 py-1.5";
 
 export default function DateStateVariable() {
   const [startDate, setStartDate] = useState(new Date());
-  // On your own: an end date
   const [endDate, setEndDate] = useState(new Date());
-  // With AI: sample due date
   const [dueDate, setDueDate] = useState(new Date());
   return (
     <div id="wd-date-state-variables">
