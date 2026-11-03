@@ -124,6 +124,7 @@ export default function Dashboard() {
             onEdit={() => setCourse(c)}
             onDelete={() => deleteCourse(c._id)}
             enrolled={isEnrolled(c._id)}
+            locked={!!currentUser && !isEnrolled(c._id)}
             onToggleEnrollment={
               currentUser
                 ? () =>

@@ -21,23 +21,24 @@ export default function CoursesLayout({
   const course = courses.find((c) => c._id === courseId);
   const [showCourseNav, setShowCourseNav] = useState(true);
 
-  // 4.10.7: only users enrolled in this course may enter it; everyone else
-  // goes back to the Dashboard.
+  // 4.10.7: a signed-in user who is not enrolled in this course goes back to
+  // the Dashboard. Signed-out visitors can still view it, because the signed-in
+  // user lives only in memory and is gone after any full page load.
   const router = useRouter();
   const { currentUser } = useAccountContext();
   const enrollments = useEnrollmentsStore((state) => state.enrollments);
-  const enrolled =
+  const blocked =
     !!currentUser &&
-    enrollments.some(
+    !enrollments.some(
       (e) => e.user === currentUser._id && e.course === courseId,
     );
   useEffect(() => {
-    if (!enrolled) {
+    if (blocked) {
       router.replace("/dashboard");
     }
-  }, [enrolled, router]);
+  }, [blocked, router]);
 
-  if (!enrolled) return null;
+  if (blocked) return null;
   return (
     <div id="wd-courses">
       <h2 className="text-2xl font-semibold text-red-600">

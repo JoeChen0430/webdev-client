@@ -11,6 +11,7 @@ export default function CourseCard({
   onEdit,
   onDelete,
   enrolled,
+  locked,
   onToggleEnrollment,
 }: {
   _id: string;
@@ -20,6 +21,7 @@ export default function CourseCard({
   onEdit: () => void;
   onDelete: () => void;
   enrolled?: boolean;
+  locked?: boolean;
   onToggleEnrollment?: () => void;
 }) {
   return (
@@ -29,7 +31,7 @@ export default function CourseCard({
         className="wd-dashboard-course-link block text-neutral-900 no-underline"
         // 4.10.7: a course you are not enrolled in keeps you on the Dashboard
         onClick={(event) => {
-          if (!enrolled) event.preventDefault();
+          if (locked) event.preventDefault();
         }}
       >
         <Image
