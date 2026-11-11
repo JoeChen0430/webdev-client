@@ -1,23 +1,32 @@
 "use client";
 
+import { useCallback, useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { FaUserCircle } from "react-icons/fa";
 import "@/app/labs/lab2/tailwind/utilities.css";
-import { users } from "../../../../database";
-import { useEnrollmentsStore } from "../../../../store/enrollmentsStore";
+import * as client from "../../../client";
+import type { User } from "../../../../account/client";
 
 export default function PeopleTable() {
   const { cid } = useParams();
   const courseId = typeof cid === "string" ? cid : "";
-  // 4.10.7: the roster follows the enrollments store, so enrolling on the
-  // Dashboard adds that person here without a reload.
-  const enrollments = useEnrollmentsStore((state) => state.enrollments);
-  const enrolled = users.filter((usr) =>
-    enrollments.some(
-      (enrollment) =>
-        enrollment.user === usr._id && enrollment.course === courseId,
-    ),
-  );
+  // 5.4.9 — the roster comes from GET /api/courses/:cid/users, so enrolling on
+  // the Dashboard shows up here after a reload instead of only in memory.
+  const [users, setUsers] = useState<User[]>([]);
+
+  const loadUsers = useCallback(async () => {
+    try {
+      return await client.findUsersForCourse(courseId);
+    } catch {
+      return [];
+    }
+  }, [courseId]);
+
+  useEffect(() => {
+    const load = async () => setUsers(await loadUsers());
+    void load();
+  }, [loadUsers]);
+
   return (
     <div id="wd-people-table" className="overflow-x-auto">
       <table className="w-full border-collapse text-left text-sm">
@@ -32,7 +41,7 @@ export default function PeopleTable() {
           </tr>
         </thead>
         <tbody>
-          {enrolled.map((user) => (
+          {users.map((user) => (
             <tr key={user._id} className="odd:bg-neutral-50">
               <td className="wd-full-name p-2 text-nowrap">
                 <FaUserCircle className="me-2 inline align-middle text-3xl text-neutral-500" />

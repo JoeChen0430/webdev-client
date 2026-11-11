@@ -6,8 +6,8 @@ import { FaAlignJustify } from "react-icons/fa6";
 import "@/app/labs/lab2/tailwind/utilities.css";
 import CourseNavigation from "./Navigation";
 import Breadcrumb from "./Breadcrumb";
-import { useCoursesStore } from "../../store/coursesStore";
-import { useEnrollmentsStore } from "../../store/enrollmentsStore";
+import * as client from "../client";
+import type { Course } from "../client";
 import { useAccountContext } from "../../account/AccountContext";
 
 export default function CoursesLayout({
@@ -17,21 +17,57 @@ export default function CoursesLayout({
 }>) {
   const { cid } = useParams();
   const courseId = typeof cid === "string" ? cid : "";
-  const courses = useCoursesStore((state) => state.courses);
-  const course = courses.find((c) => c._id === courseId);
-  const [showCourseNav, setShowCourseNav] = useState(true);
-
-  // 4.10.7: a signed-in user who is not enrolled in this course goes back to
-  // the Dashboard. Signed-out visitors can still view it, because the signed-in
-  // user lives only in memory and is gone after any full page load.
   const router = useRouter();
   const { currentUser } = useAccountContext();
-  const enrollments = useEnrollmentsStore((state) => state.enrollments);
+
+  const [course, setCourse] = useState<Course | null>(null);
+  const [showCourseNav, setShowCourseNav] = useState(true);
+  // Stamped with the user it belongs to, so signing out or switching users
+  // invalidates it by derivation instead of needing a reset.
+  const [enrollment, setEnrollment] = useState<{
+    userId: string;
+    courseIds: string[];
+  } | null>(null);
+
+  // The course name for the breadcrumb is public data (GET /api/courses).
+  useEffect(() => {
+    const loadCourse = async () => {
+      try {
+        const all = await client.fetchAllCourses();
+        setCourse(all.find((c) => c._id === courseId) ?? null);
+      } catch {
+        setCourse(null);
+      }
+    };
+    void loadCourse();
+  }, [courseId]);
+
+  // 4.10.7, now server-side: the enrolled list comes from the session rather
+  // than a Zustand store, so it survives a refresh.
+  useEffect(() => {
+    if (!currentUser) return;
+    const userId = currentUser._id;
+    const loadEnrollments = async () => {
+      try {
+        const mine = await client.findMyCourses();
+        setEnrollment({ userId, courseIds: mine.map((c) => c._id) });
+      } catch {
+        // 401 or server down: do not lock anyone out over a failed request.
+        setEnrollment({ userId, courseIds: [courseId] });
+      }
+    };
+    void loadEnrollments();
+  }, [currentUser, courseId]);
+
+  // Only trust an answer that belongs to the user who is signed in right now.
+  const myCourseIds =
+    currentUser && enrollment?.userId === currentUser._id
+      ? enrollment.courseIds
+      : null;
   const blocked =
-    !!currentUser &&
-    !enrollments.some(
-      (e) => e.user === currentUser._id && e.course === courseId,
-    );
+    !!currentUser && myCourseIds !== null && !myCourseIds.includes(courseId);
+  const checking = !!currentUser && myCourseIds === null;
+
   useEffect(() => {
     if (blocked) {
       router.replace("/dashboard");
@@ -47,7 +83,7 @@ export default function CoursesLayout({
           onClick={() => setShowCourseNav(!showCourseNav)}
           title="Toggle course navigation"
         />
-        <Breadcrumb course={course} />
+        <Breadcrumb course={course ?? undefined} />
         <span className="ms-2 text-base font-normal text-neutral-600">
           ({course?._id})
         </span>
@@ -59,7 +95,15 @@ export default function CoursesLayout({
             <CourseNavigation cid={courseId} />
           </div>
         ) : null}
-        <div className="min-w-0 flex-1">{children}</div>
+        <div className="min-w-0 flex-1">
+          {/* Hold the body — not the whole screen — while the enrollment check
+              is in flight, so a blocked user never sees the content flash. */}
+          {checking ? (
+            <p className="text-sm text-neutral-600">Checking enrollment…</p>
+          ) : (
+            children
+          )}
+        </div>
       </div>
     </div>
   );

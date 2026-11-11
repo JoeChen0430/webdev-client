@@ -1,20 +1,43 @@
 "use client";
 
+import { useCallback, useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import "@/app/labs/lab2/tailwind/utilities.css";
 import { FaPlus, FaSearch } from "react-icons/fa";
 import AssignmentItem from "./AssignmentItem";
-import { useAssignmentsStore } from "../../../store/assignmentsStore";
+import * as client from "../../client";
+import type { Assignment } from "../../client";
 
 export default function Assignments() {
   const { cid } = useParams();
   const courseId = typeof cid === "string" ? cid : "";
-  const allAssignments = useAssignmentsStore((state) => state.assignments);
-  const deleteAssignment = useAssignmentsStore(
-    (state) => state.deleteAssignment,
-  );
-  const assignments = allAssignments.filter((a) => a.course === courseId);
+  // 5.4.7 — the server filters by course, so no client-side filter remains.
+  const [assignments, setAssignments] = useState<Assignment[]>([]);
+
+  // The loader returns the list instead of writing state, so every state
+  // update happens at a call site rather than synchronously inside the effect.
+  const loadAssignments = useCallback(async () => {
+    try {
+      return await client.findAssignmentsForCourse(courseId);
+    } catch {
+      return [];
+    }
+  }, [courseId]);
+
+  useEffect(() => {
+    const load = async () => setAssignments(await loadAssignments());
+    void load();
+  }, [loadAssignments]);
+
+  const removeAssignment = async (assignmentId: string) => {
+    try {
+      await client.deleteAssignment(assignmentId);
+      setAssignments(assignments.filter((a) => a._id !== assignmentId));
+    } catch {
+      /* already gone */
+    }
+  };
 
   return (
     <div id="wd-assignments">
@@ -65,7 +88,7 @@ export default function Assignments() {
             aid={assignment._id}
             title={assignment.title}
             details={`Multiple Modules | Not available until ${assignment.available} | Due ${assignment.due} | ${assignment.points} pts`}
-            onDelete={() => deleteAssignment(assignment._id)}
+            onDelete={() => removeAssignment(assignment._id)}
           />
         ))}
       </ul>

@@ -1,43 +1,108 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "@/app/labs/lab2/tailwind/utilities.css";
 import CourseCard from "./CourseCard";
-import {
-  emptyCourse,
-  useCoursesStore,
-  type Course,
-} from "../store/coursesStore";
-import { useEnrollmentsStore } from "../store/enrollmentsStore";
+import * as client from "../courses/client";
+import { emptyCourse, type Course } from "../courses/client";
 import { useAccountContext } from "../account/AccountContext";
 
 const FIELD =
   "mb-2 block w-full max-w-xl rounded border border-neutral-300 px-3 py-1.5";
 
 export default function Dashboard() {
-  const courses = useCoursesStore((state) => state.courses);
-  const addCourse = useCoursesStore((state) => state.addCourse);
-  const deleteCourse = useCoursesStore((state) => state.deleteCourse);
-  const updateCourse = useCoursesStore((state) => state.updateCourse);
-  const [course, setCourse] = useState<Course>(emptyCourse);
-
   const { currentUser } = useAccountContext();
-  const enrollments = useEnrollmentsStore((state) => state.enrollments);
-  const enroll = useEnrollmentsStore((state) => state.enroll);
-  const unenroll = useEnrollmentsStore((state) => state.unenroll);
-  // 4.10.7: show every course, or only the enrolled ones
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [course, setCourse] = useState<Course>(emptyCourse);
+  // 5.4.5.1 — the list is whatever Express returns, so the Chapter 4 Zustand
+  // store is no longer the source of truth and no filtering happens here.
+  // The toggle only decides WHICH server call to make.
   const [showAllCourses, setShowAllCourses] = useState(false);
+  const [enrolledIds, setEnrolledIds] = useState<string[]>([]);
 
-  const isEnrolled = (courseId: string) =>
-    !!currentUser &&
-    enrollments.some(
-      (e) => e.user === currentUser._id && e.course === courseId,
-    );
+  // The loader returns data instead of writing state, so the effect below is
+  // the only place that fans it out into setState.
+  const loadCourses = useCallback(async () => {
+    const empty = { courses: [] as Course[], enrolledIds: [] as string[] };
+    // Signed out: /api/users/current/courses answers 401, so fall back to the
+    // public list. That keeps the Dashboard readable on the deploy URL.
+    if (!currentUser) {
+      try {
+        return { courses: await client.fetchAllCourses(), enrolledIds: [] };
+      } catch {
+        return empty;
+      }
+    }
+    try {
+      const mine = await client.findMyCourses();
+      return {
+        courses: showAllCourses ? await client.fetchAllCourses() : mine,
+        enrolledIds: mine.map((c) => c._id),
+      };
+    } catch {
+      return empty;
+    }
+  }, [currentUser, showAllCourses]);
 
-  const visibleCourses =
-    currentUser && !showAllCourses
-      ? courses.filter((c) => isEnrolled(c._id))
-      : courses;
+  const refresh = async () => {
+    const data = await loadCourses();
+    setCourses(data.courses);
+    setEnrolledIds(data.enrolledIds);
+  };
+
+  // currentUser is a dependency so signing in as someone else reloads the list.
+  useEffect(() => {
+    const load = async () => {
+      const data = await loadCourses();
+      setCourses(data.courses);
+      setEnrolledIds(data.enrolledIds);
+    };
+    void load();
+  }, [loadCourses]);
+
+  const isEnrolled = (courseId: string) => enrolledIds.includes(courseId);
+
+  const addCourse = async () => {
+    try {
+      await client.createCourse(course);
+      await refresh();
+    } catch {
+      /* 401 when signed out, or the server is down */
+    }
+  };
+
+  const updateCourse = async () => {
+    try {
+      await client.updateCourse(course);
+      await refresh();
+    } catch {
+      /* nothing to update */
+    }
+  };
+
+  const deleteCourse = async (courseId: string) => {
+    try {
+      await client.deleteCourse(courseId);
+      await refresh();
+    } catch {
+      /* already gone */
+    }
+  };
+
+  // 5.4.8 — enrolling writes to the server, then the list is re-read so the
+  // change survives a refresh.
+  const toggleEnrollment = async (courseId: string) => {
+    try {
+      if (isEnrolled(courseId)) {
+        await client.unenrollFromCourse(courseId);
+      } else {
+        await client.enrollIntoCourse(courseId);
+      }
+      await refresh();
+    } catch {
+      /* not signed in */
+    }
+  };
 
   return (
     <div id="wd-dashboard">
@@ -63,7 +128,7 @@ export default function Dashboard() {
           type="button"
           className="rounded bg-blue-600 px-3 py-1.5 text-sm font-medium text-white"
           id="wd-add-new-course-click"
-          onClick={() => addCourse(course)}
+          onClick={addCourse}
         >
           Add
         </button>
@@ -71,7 +136,7 @@ export default function Dashboard() {
           type="button"
           className="rounded bg-yellow-400 px-3 py-1.5 text-sm font-medium"
           id="wd-update-course-click"
-          onClick={() => updateCourse(course)}
+          onClick={updateCourse}
         >
           Update
         </button>
@@ -110,14 +175,14 @@ export default function Dashboard() {
       />
       <hr />
       <h2 id="wd-dashboard-published" className="my-3 text-xl font-semibold">
-        Published Courses ({visibleCourses.length})
+        Published Courses ({courses.length})
       </h2>
       <hr className="mb-4" />
       <div
         id="wd-dashboard-courses"
         className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
       >
-        {visibleCourses.map((c) => (
+        {courses.map((c) => (
           <CourseCard
             key={c._id}
             {...c}
@@ -126,12 +191,7 @@ export default function Dashboard() {
             enrolled={isEnrolled(c._id)}
             locked={!!currentUser && !isEnrolled(c._id)}
             onToggleEnrollment={
-              currentUser
-                ? () =>
-                    isEnrolled(c._id)
-                      ? unenroll(currentUser._id, c._id)
-                      : enroll(currentUser._id, c._id)
-                : undefined
+              currentUser ? () => toggleEnrollment(c._id) : undefined
             }
           />
         ))}

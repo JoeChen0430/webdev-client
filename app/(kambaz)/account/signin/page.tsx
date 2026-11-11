@@ -3,9 +3,10 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 import "@/app/labs/lab2/tailwind/utilities.css";
-import * as db from "../../database";
 import { useAccountContext } from "../AccountContext";
+import * as client from "../client";
 
 const FIELD =
   "mb-2 w-full rounded border border-neutral-300 px-3 py-2 text-sm";
@@ -19,19 +20,25 @@ export default function Signin() {
   const { setCurrentUser } = useAccountContext();
   const router = useRouter();
 
-  const signin = () => {
-    const user = db.users.find(
-      (u) =>
-        u.username === credentials.username &&
-        u.password === credentials.password,
-    );
-    if (!user) {
-      setError("Invalid username or password");
-      return;
+  // 5.4.2.1 — credentials go to Express in the request body; the response is
+  // the signed-in user. The local users.json lookup from Chapter 4 is gone.
+  const signin = async () => {
+    try {
+      const user = await client.signin(credentials);
+      if (!user) {
+        setError("Invalid username or password");
+        return;
+      }
+      setError("");
+      setCurrentUser(user);
+      router.push("/dashboard");
+    } catch (err) {
+      if (axios.isAxiosError(err) && err.response?.status === 401) {
+        setError("Invalid username or password");
+        return;
+      }
+      setError("Unable to reach the server. Is it running on port 4000?");
     }
-    setError("");
-    setCurrentUser(user);
-    router.push("/dashboard");
   };
 
   return (

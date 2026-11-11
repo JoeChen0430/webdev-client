@@ -35,6 +35,12 @@ const LINKS = [
     match: (p: string) => p.includes("/lab4"),
   },
   {
+    href: "/labs/lab5",
+    id: "wd-lab5-toc-link",
+    label: "Lab 5",
+    match: (p: string) => p.includes("/lab5"),
+  },
+  {
     href: "/",
     id: "wd-kambaz-link",
     label: "Kambaz",
@@ -68,11 +74,6 @@ export default function TOC() {
             </Link>
           </li>
         ))}
-        {/* Lab 4 and Lab 5 are plain placeholders; the Labs index already owns
-            the wd-lab4-link id, so these stay unidentified to keep ids unique. */}
-        <li>
-          <Link href="/labs/lab5">Lab 5</Link>
-        </li>
         <li>
           <Link href="/labs/lab2/tailwind">Tailwind</Link>
         </li>

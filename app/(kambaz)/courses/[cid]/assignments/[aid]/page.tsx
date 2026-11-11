@@ -1,14 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import "@/app/labs/lab2/tailwind/utilities.css";
-import {
-  emptyAssignment,
-  useAssignmentsStore,
-  type Assignment,
-} from "../../../../store/assignmentsStore";
+import * as client from "../../../client";
+import { emptyAssignment, type Assignment } from "../../../client";
 
 const LABEL = "mb-1 block text-sm font-medium";
 const FIELD =
@@ -21,30 +18,46 @@ export default function AssignmentEditor() {
   const assignmentId = typeof aid === "string" ? aid : "";
   const router = useRouter();
 
-  const assignments = useAssignmentsStore((state) => state.assignments);
-  const addAssignment = useAssignmentsStore((state) => state.addAssignment);
-  const updateAssignment = useAssignmentsStore(
-    (state) => state.updateAssignment,
-  );
-
-  // "new" opens a blank draft; any other id loads that assignment, but only
-  // if it belongs to the current course.
+  // "new" opens a blank draft with no request; any other id is fetched from
+  // Express (5.4.7) instead of looked up in the Chapter 4 store.
   const isNew = assignmentId === "new";
-  const existing = assignments.find(
-    (a) => a._id === assignmentId && a.course === courseId,
-  );
-  const [assignment, setAssignment] = useState<Assignment>(
-    isNew ? emptyAssignment(courseId) : (existing ?? emptyAssignment(courseId)),
+  const [assignment, setAssignment] = useState<Assignment | null>(
+    isNew ? emptyAssignment(courseId) : null,
   );
 
-  const save = () => {
-    if (isNew) {
-      addAssignment({ ...assignment, course: courseId });
-    } else {
-      updateAssignment(assignment);
+  useEffect(() => {
+    if (isNew) return;
+    const load = async () => {
+      try {
+        setAssignment(await client.findAssignmentById(assignmentId));
+      } catch {
+        // Unknown id, or the server is down: fall back to a blank draft so the
+        // editor still renders instead of hanging on "Loading".
+        setAssignment(emptyAssignment(courseId));
+      }
+    };
+    void load();
+  }, [isNew, assignmentId, courseId]);
+
+  const save = async () => {
+    if (!assignment) return;
+    try {
+      if (isNew) {
+        const { _id, ...draft } = assignment;
+        void _id;
+        await client.createAssignmentForCourse(courseId, draft);
+      } else {
+        await client.updateAssignment(assignment);
+      }
+    } catch {
+      /* server down — still navigate back rather than trapping the user */
     }
     router.push(`/courses/${courseId}/assignments`);
   };
+
+  if (!assignment) {
+    return <p className="text-sm text-neutral-600">Loading assignment…</p>;
+  }
 
   return (
     <div id="wd-assignments-editor" className="max-w-3xl">
@@ -233,7 +246,7 @@ export default function AssignmentEditor() {
 
       <hr className="my-4" />
       <div className="flex justify-end gap-2">
-        {/* Cancel navigates back without writing the store */}
+        {/* Cancel navigates back without writing to the server */}
         <Link
           href={`/courses/${courseId}/assignments`}
           id="wd-cancel"

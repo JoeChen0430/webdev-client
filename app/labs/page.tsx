@@ -1,5 +1,11 @@
 import Link from "next/link";
 
+// 5.7 — the Labs index also carries the two server links the deliverables ask
+// for. The API root is read from the environment, not hard-coded, so it points
+// at localhost:4000 locally and at the Render origin on Vercel.
+const HTTP_SERVER = process.env.NEXT_PUBLIC_HTTP_SERVER;
+const LINK = "text-blue-700 underline";
+
 export default function Labs() {
   return (
     <div id="wd-labs">
@@ -13,10 +19,35 @@ export default function Labs() {
           id="wd-github"
           target="_blank"
           rel="noreferrer"
+          className={LINK}
         >
           GitHub repository
         </a>
       </p>
+      <ul className="m-0 list-disc ps-6">
+        <li>
+          <a
+            href="https://github.com/JoeChen0430/webdev-server"
+            id="wd-server-github"
+            target="_blank"
+            rel="noreferrer"
+            className={LINK}
+          >
+            Node server GitHub repository
+          </a>
+        </li>
+        <li>
+          <a
+            href={HTTP_SERVER}
+            id="wd-server-link"
+            target="_blank"
+            rel="noreferrer"
+            className={LINK}
+          >
+            Node server root ({HTTP_SERVER})
+          </a>
+        </li>
+      </ul>
       <ul>
         <li>
           <Link href="/labs/lab1">Lab 1: HTML Examples</Link>
@@ -42,7 +73,9 @@ export default function Labs() {
           </Link>
         </li>
         <li>
-          <Link href="/labs/lab5">Lab 5</Link>
+          <Link href="/labs/lab5" id="wd-lab5-link">
+            Lab 5: HTTP Servers and RESTful Web APIs
+          </Link>
         </li>
       </ul>
     </div>
