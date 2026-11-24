@@ -82,6 +82,13 @@ export const fetchAllCourses = async () => {
   return data;
 };
 
+// 6.4.1.1 — one course by primary key, now that findCourseById is a real
+// model.findById on the server instead of an array lookup.
+export const findCourseById = async (courseId: string) => {
+  const { data } = await axios.get<Course>(`${COURSES_API}/${courseId}`);
+  return data;
+};
+
 // The Dashboard list: Express reads the session and filters by enrollment.
 export const findMyCourses = async () => {
   const { data } = await axiosWithCredentials.get<Course[]>(

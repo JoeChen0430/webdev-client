@@ -77,6 +77,11 @@ export default function Labs() {
             Lab 5: HTTP Servers and RESTful Web APIs
           </Link>
         </li>
+        <li>
+          <Link href="/labs/lab6" id="wd-lab6-link">
+            Lab 6: Integrating React with MongoDB
+          </Link>
+        </li>
       </ul>
     </div>
   );

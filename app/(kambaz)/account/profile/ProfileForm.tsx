@@ -19,9 +19,17 @@ export default function ProfileForm({ user }: { user: User }) {
 
   // 5.4.2.3 — save the draft, then refresh Context with the server's version so
   // the rest of Kambaz sees exactly what was stored.
+  //
+  // 6.2.3 — the Mongoose schema hides password with `select: false`, so the
+  // profile the server sends back has no password at all and the field below
+  // renders empty. Sending that empty string would $set the password to "" and
+  // lock the account out, so an untouched (or emptied) field is dropped from
+  // the payload instead and the stored password is left alone.
   const updateProfile = async () => {
+    const { password, ...rest } = profile;
+    const updates: User = password ? { ...rest, password } : rest;
     try {
-      setCurrentUser(await client.updateUser(profile));
+      setCurrentUser(await client.updateUser(updates));
       setStatus("Saved");
     } catch {
       setStatus("Unable to save. Is the server running on port 4000?");
@@ -51,7 +59,7 @@ export default function ProfileForm({ user }: { user: User }) {
         id="wd-password"
         type="password"
         className={`wd-password ${FIELD}`}
-        value={profile.password}
+        value={profile.password ?? ""}
         onChange={(e) => setProfile({ ...profile, password: e.target.value })}
       />
       <input
@@ -76,13 +84,13 @@ export default function ProfileForm({ user }: { user: User }) {
       <input
         id="wd-loginid"
         className={FIELD}
-        value={profile.loginId}
+        value={profile.loginId ?? ""}
         onChange={(e) => setProfile({ ...profile, loginId: e.target.value })}
       />
       <input
         id="wd-section"
         className={FIELD}
-        value={profile.section}
+        value={profile.section ?? ""}
         onChange={(e) => setProfile({ ...profile, section: e.target.value })}
       />
       <select
